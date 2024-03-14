@@ -956,6 +956,8 @@ See <https://roxygen2.r-lib.org/dev/articles/reuse.html#child-documents> for det
 
 This chapter focuses on function documentation, but remember you can document other things, as detailed in `vignette("rd-other", package = "roxygen2")`.
 In particular, you can create a help topic for the package itself by documenting the special sentinel `"_PACKAGE"`.
+This latter placeholder could be placed in any `.R`-file similar to a function definition, except that Roxygen-style comments ahead of it will document the package
+instead of a particular function.
 The resulting `.Rd` file automatically pulls in information parsed from the `DESCRIPTION`, including title, description, list of authors, and useful URLs.
 This help topic appears alongside all your other topics and can also be accessed with `package?pkgname`, e.g. `package?usethis`, or even just `?usethis`.
 
@@ -965,6 +967,9 @@ We recommend calling `usethis::use_package_doc()` to set up this package-level d
 #' @keywords internal 
 "_PACKAGE"
 ```
+
+You can then add Roxygen-style comment lines in this dummy file before this content for your package documentation. Remove the `#' @keywords internal` if you 
+like this documentation to become part of any external documentation, e.g., PDF manuals generated with `devtools::build_manual()`.
 
 The `R/{pkgname}-package.R` file is the main reason we wanted to mention `use_package_doc()` and package-level documentation here.
 It turns out there are a few other package-wide housekeeping tasks for which this file is a very natural home.
